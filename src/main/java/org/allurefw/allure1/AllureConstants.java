@@ -8,7 +8,7 @@ public final class AllureConstants {
     /**
      * The name of Allure schema. You can find the schema in resources of allure-model module.
      */
-    public static final String SCHEMA_FILE_NAME = "allure.xsd";
+    public static final String SCHEMA_FILE_NAME = "xsd/allure1_model.xsd";
 
     /**
      * The suffix of test suites files. Each test suite file should has such suffix
@@ -39,7 +39,7 @@ public final class AllureConstants {
     /**
      * The version of Allure.
      */
-    public static final String VERSION = AllureConfig.class.getPackage().getImplementationVersion();
+    public static final String VERSION = AllureConstants.class.getPackage().getImplementationVersion();
 
     /**
      * The file name of environment file.

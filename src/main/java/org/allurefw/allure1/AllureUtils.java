@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 import ru.yandex.qatools.allure.model.Label;
 import ru.yandex.qatools.allure.model.LabelName;
 import ru.yandex.qatools.allure.model.ObjectFactory;
-import ru.yandex.qatools.allure.model.SeverityLevel;
 import ru.yandex.qatools.allure.model.TestSuiteResult;
 
 import javax.xml.bind.JAXB;
@@ -29,7 +28,6 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -81,20 +79,6 @@ public final class AllureUtils {
      */
     public static String generateTestSuiteJsonName() {
         return String.format("%s%s.json", UUID.randomUUID().toString(), TEST_SUITE_FILE_SUFFIX);
-    }
-
-    /**
-     * Safe wrapper for {@link #listAttachmentFiles(Path...)}.
-     *
-     * @see #listFiles(String, Path...)
-     */
-    public static List<Path> listAttachmentFilesSafe(Path... directories) {
-        try {
-            return listAttachmentFiles(directories);
-        } catch (IOException e) {
-            LOGGER.error("Error during attachments scan", e);
-            return Collections.emptyList();
-        }
     }
 
     /**
@@ -271,69 +255,6 @@ public final class AllureUtils {
         } catch (SAXException e) {
             throw new AllureException("Error during results validation", e);
         }
-    }
-
-    /**
-     * Create feature label with given label.
-     */
-    public static Label createFeatureLabel(String feature) {
-        return createLabel(LabelName.FEATURE, feature);
-    }
-
-    /**
-     * Create story label with given label.
-     */
-    public static Label createStoryLabel(String story) {
-        return createLabel(LabelName.STORY, story);
-    }
-
-    /**
-     * Create severity label with given label.
-     */
-    public static Label createSeverityLabel(SeverityLevel level) {
-        return createLabel(LabelName.SEVERITY, level.value());
-    }
-
-    /**
-     * Create language label with given label.
-     */
-    public static Label createProgrammingLanguageLabel() {
-        return createLabel(LabelName.LANGUAGE, "JAVA");
-    }
-
-    /**
-     * Create test framework label with given label.
-     */
-    public static Label createTestFrameworkLabel(String testFrameworkName) {
-        return createLabel(LabelName.FRAMEWORK, testFrameworkName);
-    }
-
-    /**
-     * Create issue label with given label.
-     */
-    public static Label createIssueLabel(String issueKey) {
-        return createLabel(LabelName.ISSUE, issueKey);
-    }
-
-    /**
-     * Create test label with given label.
-     */
-    public static Label createTestLabel(String testKey) {
-        return createLabel(LabelName.TEST_ID, testKey);
-    }
-
-    /**
-     * Create host label with given value.
-     */
-    public static Label createHostLabel(String host) {
-        return createLabel(LabelName.HOST, host);
-    }
-
-    /**
-     * Create thread label with given value.
-     */
-    public static Label createThreadLabel(String thread) {
-        return createLabel(LabelName.THREAD, thread);
     }
 
     /**
