@@ -59,10 +59,7 @@ mavenJob(projectName + '_deploy') {
             }
             branch('master')
             extensions {
-                mergeOptions {
-                    remote('origin')
-                    branch('master')
-                }
+                localBranch('master')
             }
         }
     }
